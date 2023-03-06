@@ -32,10 +32,9 @@ public class Customer implements Serializable {
     @NotNull
     private String company;
     @NotNull
-    private int phone_number;
+    private String phone;
     @NotNull
     private String address1;
-    @NotNull
     private String address2;
     @NotNull
     private String city;
@@ -90,12 +89,12 @@ public class Customer implements Serializable {
         this.company = company;
     }
 
-    public int getPhone_number() {
-        return phone_number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone_number(int phone_number) {
-        this.phone_number = phone_number;
+    public void setPhone(String phone_number) {
+        this.phone = phone;
     }
 
     public String getAddress1() {
@@ -151,11 +150,11 @@ public class Customer implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return id == customer.id && phone_number == customer.phone_number && postalCode == customer.postalCode && firstName.equals(customer.firstName) && lastName.equals(customer.lastName) && email.equals(customer.email) && company.equals(customer.company) && address1.equals(customer.address1) && address2.equals(customer.address2) && city.equals(customer.city) && state.equals(customer.state) && country.equals(customer.country);
+        return id == customer.id && phone == customer.phone && postalCode == customer.postalCode && firstName.equals(customer.firstName) && lastName.equals(customer.lastName) && email.equals(customer.email) && company.equals(customer.company) && address1.equals(customer.address1) && address2.equals(customer.address2) && city.equals(customer.city) && state.equals(customer.state) && country.equals(customer.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, company, phone_number, address1, address2, city, state, postalCode, country);
+        return Objects.hash(id, firstName, lastName, email, company, phone, address1, address2, city, state, postalCode, country);
     }
 }
