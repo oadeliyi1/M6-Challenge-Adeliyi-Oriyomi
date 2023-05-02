@@ -14,40 +14,37 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "customer")
-
+@Table(name="customer")
 public class Customer implements Serializable {
 
     @Id
-    @Column(name = "customer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull
+  //  @NotNull
     private String firstName;
-    @NotNull
+    //@NotNull
     private String lastName;
-    @NotNull
+
     private String email;
-    @NotNull
+
     private String company;
-    @NotNull
+  //  @NotNull
     private String phone;
-    @NotNull
+  //  @NotNull
     private String address1;
     private String address2;
-    @NotNull
+   // @NotNull
     private String city;
-    @NotNull
+  //  @NotNull
     private String state;
-    @NotNull
+    //@NotNull
     private int postalCode;
-    @NotNull
+   // @NotNull
     private String country;
 
 
-    @OneToMany(mappedBy="roasterId", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private Set<Customer> customers = new HashSet<>();
+
 
     public int getId() {
         return id;

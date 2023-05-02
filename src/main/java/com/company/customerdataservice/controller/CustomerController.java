@@ -6,6 +6,7 @@ import com.company.customerdataservice.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.webjars.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,8 @@ A GET route that returns all customers for a specific state. 10 pts
 
     @PutMapping("/customers")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCustomer(@RequestBody Customer Customer) {
-        repo.save(Customer);
+    public void updateCustomer(@RequestBody Customer customer) {
+        repo.save(customer);
     }
 
     @DeleteMapping("/customers/{id}")
@@ -53,16 +54,33 @@ A GET route that returns all customers for a specific state. 10 pts
         }
     }
 
-    @GetMapping("/customers/{state}")
-    public List<Customer> getCustomersByState(@PathVariable String state) {
+  //  @GetMapping("/customers/{state}")
+  @RequestMapping(value="/customers/{state}", method=RequestMethod.GET)
+  @ResponseStatus(value = HttpStatus.OK)
+  public List<Customer> getCustomersByState(@PathVariable String state) {
 
       //  List<Customer> customerList = new ArrayList<>();
+
         List<Customer> returnVal = repo.findByState(state);
-        if (!returnVal.isEmpty()) {
+        if (returnVal != null) {
             return returnVal;
-        } else {
-            return null;
         }
+        throw new NotFoundException("Customers from that state not found.");
+
+
+       // return repo.findByState(state);
+
+    }
+
+    @PostMapping("/customers")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Customer addCustomer (@RequestBody Customer Customer) {
+        return repo.save(Customer);
+    }
+
+    @GetMapping("/customers")
+    public List<Customer> getCustomers() {
+        return repo.findAll();
     }
 }
 
